@@ -30,7 +30,7 @@ angular.module("knapsack.main", [])
           title: item.volumeInfo.title
         };
         return data;
-      });
+        });
     };
 
     var getNytimes = function() {

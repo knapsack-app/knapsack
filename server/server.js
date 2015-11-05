@@ -394,10 +394,17 @@ app.get("/api/collection/nytimes", function(req, res) {
   request("https://api.nytimes.com/svc/books/v3/lists.json?list-name=hardcover-fiction&api-key=b2f850985c69c53458eac07ce2f7a874%3A7%3A65642337",
     function(err, response, body) {
       if (!err && response.statusCode === 200) {
-        res.send(body);
+        var bestsellers = JSON.parse(body);
+        bestsellers = _.map(bestsellers.results, function(book) {
+          var tableData = {};
+          var dat = book.book_details[0];
+          tableData.title = dat.title;
+          tableData.author = dat.author;
+          return tableData;
+        });
+        res.send(bestsellers);
       } else {
         res.send("failed fetching NYTimes bestsellers");
-        console.log("failed fetching NYTimes bestsellers");
       }
     });
 });

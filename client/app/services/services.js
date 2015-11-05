@@ -35,7 +35,7 @@ angular.module("knapsack.services", [])
         url: "api/signin",
         data: user
       }).then(function succesCallback(resp) {
-        if (resp.data==="Wrong password" || resp.data.constructor === String) {
+        if (resp.data === "Wrong password" || resp.data.constructor === String) {
           return resp.data;
         }
         Session.create(resp.data.id, resp.data.user);
@@ -151,10 +151,10 @@ angular.module("knapsack.services", [])
     var getNytimes = function() {
       return $http({
           method: "GET",
-          url: "https://api.nytimes.com/svc/books/v3/lists.json?list-name=hardcover-fiction&api-key=b2f850985c69c53458eac07ce2f7a874%3A7%3A65642337"
+          url: "api/collection/nytimes"
         })
         .then(function(resp) {
-          return resp.data.results;
+          return resp.data;
         });
     };
 
@@ -208,7 +208,7 @@ angular.module("knapsack.services", [])
     var shareBook = function(collection, book, user) {
       return $http({
           method: "POST",
-          url: "/api/share",
+          url: "/api/collection/share",
           data: JSON.stringify({
             collection: collection,
             book: book,

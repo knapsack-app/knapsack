@@ -1,6 +1,7 @@
 var express = require("express");
 var bodyParser = require("body-parser"); // request body parsing middleware (json, url)
 var morgan = require("morgan"); // log requests to the console
+var request = require("request");
 
 var session = require("express-session");
 var db = require("../config/database.js"); // connect to database
@@ -332,7 +333,7 @@ app.post("/api/collection/delete", function(req, res) {
   // an API call (not stored in the DB). If you try to delete a book 
   // from the bestsellers collection, the server will crash. This 
   // if statement prevents that from happening.
-  if(req.body.collection === "bestsellers") {
+  if (req.body.collection === "bestsellers") {
     console.log("Cant delete from bestsellers");
     return;
   }
@@ -365,7 +366,7 @@ app.post("/api/collection/delete", function(req, res) {
 //POST request to SHARE book to another user and places book in Recommended collection
 //Unit Test : Pass (11/2/2015)
 
-app.post("/api/share", function(req, res) {
+app.post("/api/collection/share", function(req, res) {
   User.findOne({
     where: {
       user_name: req.body.user
@@ -385,6 +386,27 @@ app.post("/api/share", function(req, res) {
         });
     });
   });
+});
+
+//GET request to get NYTimes bestsellers for default bestsellers list
+
+app.get("/api/collection/nytimes", function(req, res) {
+  request("https://api.nytimes.com/svc/books/v3/lists.json?list-name=hardcover-fiction&api-key=b2f850985c69c53458eac07ce2f7a874%3A7%3A65642337",
+    function(err, response, body) {
+      if (!err && response.statusCode === 200) {
+        var bestsellers = JSON.parse(body);
+        bestsellers = _.map(bestsellers.results, function(book) {
+          var tableData = {};
+          var dat = book.book_details[0];
+          tableData.title = dat.title;
+          tableData.author = dat.author;
+          return tableData;
+        });
+        res.send(bestsellers);
+      } else {
+        res.send("failed fetching NYTimes bestsellers");
+      }
+    });
 });
 
 //GET request to get users from the database

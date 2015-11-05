@@ -24,7 +24,9 @@ angular.module("knapsack.main", [])
       }).then(function(response){
         return response.data.items.map(function(item){
           var data = {
-            /* There are often multiple authors for books. This comes from the Google Books API via an array. For the sake of time, we are using this function to limit the amount of authors to the first result. In the future, this would be good to flush out to allow for storing multiple authors in the DB
+            /* There are often multiple authors for books. This comes from the Google Books API via an array. 
+            For the sake of time, we are using this function to limit the amount of authors to the first result. 
+            In the future, this would be good to flush out to allow for storing multiple authors in the DB
             */
             author: item.volumeInfo.authors === undefined? "" : item.volumeInfo.authors[0],
             title: item.volumeInfo.title
@@ -35,19 +37,9 @@ angular.module("knapsack.main", [])
     };
 
     var getNytimes = function() {
-      var bestSellers = [];
       Contents.getNytimes().then(function(resp) {
-        resp.forEach(function(book) {
-          var tableData = {};
-          var dat = book.book_details[0];
-
-          tableData.title = dat.title;
-          tableData.author = dat.author;
-          bestSellers.push(tableData);
-        });
-        var books = bestSellers;
-        $scope.displayedCollection = books;
-        $scope.bookCollection = [].concat(books);
+        $scope.displayedCollection = resp;
+        $scope.bookCollection = [].concat(resp);
       });
     };
 

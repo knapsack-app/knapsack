@@ -35,7 +35,7 @@ angular.module("knapsack.services", [])
         url: "api/signin",
         data: user
       }).then(function succesCallback(resp) {
-        if (resp.data==="Wrong password" || resp.data.constructor === String) {
+        if (resp.data === "Wrong password" || resp.data.constructor === String) {
           return resp.data;
         }
         Session.create(resp.data.id, resp.data.user);
@@ -154,7 +154,7 @@ angular.module("knapsack.services", [])
           url: "api/collection/nytimes"
         })
         .then(function(resp) {
-          return resp.data.results;
+          return resp.data;
         });
     };
 

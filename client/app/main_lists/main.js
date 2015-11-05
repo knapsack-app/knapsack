@@ -37,19 +37,9 @@ angular.module("knapsack.main", [])
     };
 
     var getNytimes = function() {
-      var bestSellers = [];
       Contents.getNytimes().then(function(resp) {
-        resp.forEach(function(book) {
-          var tableData = {};
-          var dat = book.book_details[0];
-
-          tableData.title = dat.title;
-          tableData.author = dat.author;
-          bestSellers.push(tableData);
-        });
-        var books = bestSellers;
-        $scope.displayedCollection = books;
-        $scope.bookCollection = [].concat(books);
+        $scope.displayedCollection = resp;
+        $scope.bookCollection = [].concat(resp);
       });
     };
 

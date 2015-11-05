@@ -365,7 +365,7 @@ app.post("/api/collection/delete", function(req, res) {
 //POST request to SHARE book to another user and places book in Recommended collection
 //Unit Test : Pass (11/2/2015)
 
-app.post("/api/share", function(req, res) {
+app.post("/api/collection/share", function(req, res) {
   User.findOne({
     where: {
       user_name: req.body.user

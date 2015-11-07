@@ -229,6 +229,7 @@ angular.module("knapsack.services", [])
           url: "/api/friends"
         })
         .then(function succesCallback(resp) {
+          console.log("succ");
           return resp.data;
         }, function errorCallback(resp) {
           console.log(resp.status + ": failed loading friends");

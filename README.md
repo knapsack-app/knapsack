@@ -28,12 +28,11 @@ Key Features :
 - Clean and simple UI
 - Auto complete feature utilizing Google Books API
 
-Knapsack 1.0 leverages Angular, Express, Node, Postgres, Sequelize, and Heroku technologies.
+Knapsack 1.0 leverages Angular, Express, Node, SQLite, Sequelize, and Heroku technologies.
 
 ## Requirements
 
 - Node 4.0.x
-- Postgresql 9.4.x
 
 ## Development
 

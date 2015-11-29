@@ -14,10 +14,6 @@ var inject = require('gulp-inject');
 var angularFilesort = require('gulp-angular-filesort');
 var es = require('event-stream');
 
-//much of the code here is from this article: http://paislee.io/a-healthy-gulp-setup-for-angularjs-projects/
-
-//some of it might not be necessary
-
 //commonly used files paths stored here in an object for easy reference
 var paths = {
   scripts: "./client/app/**/*.js",

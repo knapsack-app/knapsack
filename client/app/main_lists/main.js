@@ -18,7 +18,7 @@ angular.module("knapsack.main", [])
         params: {
           q: val,
           sensor: false,
-          key: "AIzaSyDFoDLRgBHGFzXIOXCT3CiE4wKEVCicgWI", // Insert Google API key here
+          key: "AIzaSyBnIW7V1MqDUiXWd7W-_f4-JpJ0ZEL6GtQ", // Insert Google API key here
           printType: "books"
         }
       }).then(function(response){

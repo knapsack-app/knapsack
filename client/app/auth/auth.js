@@ -51,7 +51,7 @@ var SignupModalCtrl = function($scope, $rootScope, $location, $modalInstance, us
       Auth.signUp($scope.user)
       .then(function(user) {
         if (user === "already exists"){
-          alert("Username already exists. Please choose another one.")
+          alert("Username already exists. Please choose another one.");
         } else {
           $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
           $scope.setCurrentUser(user);

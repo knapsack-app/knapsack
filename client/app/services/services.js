@@ -16,9 +16,8 @@ angular.module("knapsack.services", [])
         url: "api/signup",
         data: user
       }).then(function succesCallback(resp) {
-        console.log("signup resposne", resp.data);
         if (resp.data.constructor === String && resp.data.search("already taken") > 0) {
-          return ("already exists");
+          return "already exists";
         } else {
           Session.create(resp.data.id, resp.data.user);
           return resp.data.user;
@@ -54,6 +53,7 @@ angular.module("knapsack.services", [])
           user: user
         })
       }).then(function succesCallback(resp) {
+        console.log("succesfully logged out");
         Session.destroy();
         return resp;
       }, function errorCallback(resp) {
@@ -154,6 +154,7 @@ angular.module("knapsack.services", [])
           url: "api/collection/nytimes"
         })
         .then(function(resp) {
+          console.log("succesfully fetched nytimes bestsellers");
           return resp.data;
         });
     };
@@ -167,6 +168,7 @@ angular.module("knapsack.services", [])
           })
         })
         .then(function succesCallback(resp) {
+          console.log("successfully fetched books for: " + collection + "from db");
           return resp.data;
         }, function errorCallback(resp) {
           console.log(resp.status + ": failed loading books for collection " + collection);
@@ -216,7 +218,7 @@ angular.module("knapsack.services", [])
           })
         })
         .then(function succesCallback(resp) {
-          console.log("succesfully shared book to user: " + user);
+          console.log("succesfully shared book with user: " + user);
         }, function errorCallback(resp) {
           console.log(resp.status + ": failed sharing book with user: " + user);
         });
@@ -229,6 +231,7 @@ angular.module("knapsack.services", [])
           url: "/api/friends"
         })
         .then(function succesCallback(resp) {
+          console.log("successfully fetched friends from server.");
           return resp.data;
         }, function errorCallback(resp) {
           console.log(resp.status + ": failed loading friends");
